@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from './constants'
 
 export const styles = StyleSheet.create({
   buttonContainer: {
@@ -10,15 +11,15 @@ export const styles = StyleSheet.create({
   },
   btnTitle: {
     fontSize: 25,
-    color: '#fff',
+    color: COLORS.white,
   },
   error: {
     fontSize: 12,
-    color: 'red',
+    color: COLORS.error,
     marginTop: 10,
     marginBottom: 10,
   },
   disableButton: {
-    backgroundColor: '#ccc',
+    backgroundColor: COLORS.disable,
   }
 });

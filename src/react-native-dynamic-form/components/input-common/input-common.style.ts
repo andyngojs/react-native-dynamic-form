@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../constants';
 
 export const styles = StyleSheet.create({
   col: {
@@ -11,6 +12,6 @@ export const styles = StyleSheet.create({
   input: {
     padding: 15,
     borderRadius: 5,
-    backgroundColor: '#dadada',
+    backgroundColor: COLORS.backgroundInput,
   },
 });

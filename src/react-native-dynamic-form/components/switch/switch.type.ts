@@ -1,8 +1,8 @@
 import {SwitchProps as RNSwitchProp} from 'react-native';
-import {Field} from '../../dynamic-form.type';
+import {FormSchema} from '../../dynamic-form.type';
 
 export interface SwitchProps extends RNSwitchProp {
-  field: Field;
+  field: FormSchema;
   values: any;
   setFieldValue?: any;
   isError?: boolean;

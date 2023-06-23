@@ -9,7 +9,7 @@ import {
 // @packages
 import {Formik} from 'formik';
 // @types
-import {DynamicFormProps, Field, FieldEnum} from './dynamic-form.type';
+import {DynamicFormProps, FormSchema, FieldEnum} from './dynamic-form.type';
 // @hooks
 import {useDynamicForm} from './dynamic-form.hook';
 // @components
@@ -18,14 +18,14 @@ import {InputCommon, Switch} from './components';
 import {styles} from './dynamic-form.style';
 
 const _DynamicForm: React.FC<DynamicFormProps> = ({
-  fields,
-  validationSchema,
+  formSchema,
   onSubmit,
-  buttonTitle,
+
+  buttonTitle = 'Submit',
   buttonContainerStyle,
   buttonTitleStyle,
 }) => {
-  const {initialValues} = useDynamicForm(fields);
+  const {initialValues, validationSchema} = useDynamicForm(formSchema);
 
   return (
     <Formik
@@ -43,12 +43,10 @@ const _DynamicForm: React.FC<DynamicFormProps> = ({
         touched,
         setFieldValue,
       }) => {
-        console.log(values);
-        
         return (
           <ScrollView style={{flex: 1}}>
             <KeyboardAvoidingView style={{marginHorizontal: 12}}>
-              {fields.map((field: Field, index: number) => {
+              {formSchema.map((field: FormSchema, index: number) => {
                 if (field.type === FieldEnum.SWITCH) {
                   return (
                     <Switch
@@ -134,7 +132,7 @@ const _DynamicForm: React.FC<DynamicFormProps> = ({
                   !isValid && styles.disableButton,
                 ]}>
                 <Text style={[buttonTitleStyle, styles.btnTitle]}>
-                  {buttonTitle || 'Submit'}
+                  {buttonTitle}
                 </Text>
               </TouchableOpacity>
             </KeyboardAvoidingView>

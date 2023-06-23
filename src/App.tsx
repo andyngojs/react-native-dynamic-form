@@ -1,66 +1,55 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import * as yup from 'yup';
-import {DynamicForm, Field, FieldEnum} from '@src/react-native-dynamic-form';
+import {DynamicForm, FormSchema} from '@src/react-native-dynamic-form';
 
-const fields: Field[] = [
+const formSchema: FormSchema[] = [
   {
     label: 'Name',
-    placeholder: 'The name will be displayed',
+    placeholder: 'Enter full name',
+    type: 'text',
     name: 'name',
     value: '',
   },
   {
     label: 'Email',
     placeholder: 'Please input email',
-    type: FieldEnum.EMAIL,
+    type: 'email',
     name: 'email',
     value: '',
+    isRequire: true,
   },
   {
     label: 'Password',
     placeholder: 'Password',
-    type: FieldEnum.PASSWORD,
+    type: 'password',
     name: 'password',
     value: '',
+    isRequire: true,
+    minLength: 3,
+    maxLength: 30,
   },
   {
     label: 'Confirm password',
     placeholder: 'Confirm password',
-    type: FieldEnum.PASSWORD,
+    type: 'confirm_password',
     name: 'confirmPassword',
     value: '',
+    isRequire: true,
   },
   {
     label: 'Agreement Terms',
-    type: FieldEnum.SWITCH,
+    type: 'switch',
     name: 'agreeTerm',
     value: false,
   },
 ];
 
-const schema = yup.object().shape({
-  password: yup.string().required().min(3).max(30),
-  email: yup.string().required().email(),
-  confirmPassword: yup
-    .string()
-    .required()
-    .test(
-      'passwords-match',
-      'Confirm password must matches the password',
-      function (value) {
-        return this.parent.password === value;
-      },
-    ),
-});
-
 function App() {
   return (
     <SafeAreaView style={{flex: 1}}>
       <DynamicForm
-        fields={fields}
-        validationSchema={schema}
-        onSubmit={(data: any, actions: any) => {
+        formSchema={formSchema}
+        onSubmit={(data, actions) => {
           console.log('Submited', data);
         }}
         buttonTitle="Đăng Ký"

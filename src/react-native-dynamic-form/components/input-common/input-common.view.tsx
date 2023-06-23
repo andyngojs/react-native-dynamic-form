@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {styles} from './input-common.style';
 import {InputCommonProps} from './input-common.type';
+import {COLORS} from '../../constants';
 
 const _InputCommon: React.FC<InputCommonProps> = ({
   field,
@@ -12,7 +13,7 @@ const _InputCommon: React.FC<InputCommonProps> = ({
 }) => {
   const stateColorStyle = React.useMemo(() => {
     if (isError) {
-      return {borderColor: 'red', borderWidth: 1};
+      return {borderColor: COLORS.error, borderWidth: 1};
     }
   }, [field, isError]);
 
