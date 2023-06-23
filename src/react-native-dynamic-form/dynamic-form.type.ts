@@ -1,22 +1,31 @@
+import {FormikHelpers, FormikValues} from 'formik';
 import {TextStyle, ViewStyle} from 'react-native';
-import {AnyObject} from 'yup';
 
 export interface DynamicFormProps {
-  fields: Field[];
-  validationSchema: AnyObject;
-  onSubmit: any;
+  formSchema: FormSchema[];
+  onSubmit: (
+    values: FormikValues,
+    formikHelpers: FormikHelpers<FormikValues>,
+  ) => void | Promise<any>;
   buttonTitle?: string;
   buttonContainerStyle?: ViewStyle;
   buttonTitleStyle?: TextStyle;
 }
 
-export type Field = {
+export type FormSchema = {
   label: string;
   placeholder?: string;
   type?: FieldEnum | string;
   name: string;
   value: string | boolean;
   numberOfLines?: number;
+  isRequire?: boolean | string;
+  minLength?: number | string;
+  maxLength?: number | string;
+};
+
+type getInitialValues = {
+  
 };
 
 export type InitialValues = {
@@ -27,9 +36,11 @@ export type InitialValues = {
 };
 
 export enum FieldEnum {
-  CHECKBOX = 'checkbox',
-  PASSWORD = 'password',
-  TEXTAREA = 'textarea',
+  TEXT = 'text',
   EMAIL = 'email',
+  PASSWORD = 'password',
+  CONFIRM_PASSWORD = 'confirm_password',
+  TEXTAREA = 'textarea',
+  CHECKBOX = 'checkbox',
   SWITCH = 'switch',
 }
